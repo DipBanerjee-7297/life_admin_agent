@@ -1,0 +1,21 @@
+# life_admin/agent_utils.py
+from dataclasses import dataclass
+from typing import Optional
+
+
+@dataclass
+class Task:
+    id: int
+    title: str
+    due: Optional[str] = None
+    status: str = "pending"  # "pending" or "done"
+
+
+def task_to_str(task: Task) -> str:
+    """Return a nice human-readable representation of a task."""
+    base = f"[{task.id}] {task.title}"
+    if task.due:
+        base += f" (due {task.due})"
+    if task.status != "pending":
+        base += f" - {task.status}"
+    return base
